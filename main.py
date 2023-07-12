@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import *
-from connect import envioAoBD
+from connect import *
 
 def obter_valores():
     # Obter os valores dos campos de entrada
@@ -19,7 +19,7 @@ def obter_valores():
     print("Valor 5:", valor5)
     print("Valor 6:", valor6)
 
-    envioAoBD(valor1, valor2, valor3, valor4, valor5, valor6)
+    enviar.envioAoBD(valor1, valor2, valor3, valor4, valor5, valor6)
 
 janela = tk.Tk()
 janela.title("Exemplo de Janela")
@@ -52,13 +52,15 @@ texto5.place(x=10, y=150)
 entry5 = StringVar()
 entry5.set( " " )
 item_menu = OptionMenu(janela, entry5, "Laticinios", "Legumes", "Bebidas", "Calçados", "Vestuário", 
-                       "Higiene","Eletrodomésticos", "Outros")
+                       "Higiene","Eletrodomésticos","Eletrônicos" ,"Outros")
 item_menu.place(x=10, y=180)
 
 texto6 = Label(janela, text="SKU", anchor='center')
 texto6.place(x=220, y=150)
 entry6 = tk.Entry(janela)
 entry6.place(x=220,y=180)
+
+enviar = EnviarAoBD()
 
 # Botão para obter os valores dos campos de entrada
 botao = tk.Button(janela, text="Enviar", command=obter_valores)
