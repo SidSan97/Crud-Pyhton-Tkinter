@@ -26,13 +26,11 @@ def listar_tudo():
             label2.grid(row=i+8, column=j)  # Adicionando 2 ao valor de 'row' para posicionar abaixo da primeira tabela
 
         # Criação do botão para cada linha
-        botao = tk.Button(root, text="Excluir", command=lambda i=dados[i][0]: botao_clicado(i))
+        botao = tk.Button(root, text="Excluir", command=lambda i=dados[i][0]: deletar_item(i))
         botao.grid(row=i+8, column=7)
 
-    def botao_clicado(indice):
-        #print("Botão", indice, "clicado")
+    def deletar_item(indice):
         delete(indice)
 
     root.mainloop()
 
-listar_tudo()
