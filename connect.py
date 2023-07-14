@@ -41,7 +41,7 @@ def getAll():
 
     cursor = conexao.cursor()
 
-    cursor.execute("SELECT * FROM produto WHERE id=1")
+    cursor.execute("SELECT * FROM produto")
 
     resultados = cursor.fetchall()
 
@@ -52,3 +52,27 @@ def getAll():
     conexao.close()
 
     return dados
+
+def delete(id):
+    conexao = conect()
+    cursor = conexao.cursor()
+
+    sql = "DELETE FROM produto WHERE id=%s"  
+
+    valores = (id,)  
+    cursor.execute(sql, valores)
+    conexao.commit()
+    print("Deletado com sucesso")
+
+    cursor.close()
+    conexao.close()
+
+
+def numLinha():
+    conexao = conect()
+    cursor = conexao.cursor()
+    cursor.execute("SELECT COUNT(*) FROM produto")
+    row_count = cursor.fetchone()[0]
+
+    return row_count
+
