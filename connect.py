@@ -54,32 +54,23 @@ def getAll():
     return dados
 
 def search(dado):
-    conexao = conect()
     dados = []
+    conexao = conect()
+    cursor = conexao.cursor()
 
-    try:
-        cursor = conexao.cursor()
+    sql = "SELECT * FROM produto WHERE id LIKE %s OR prod_nome LIKE %s OR sku LIKE %s OR num_lote LIKE %s OR tipo_prod LIKE %s"
+    valores = (f"%{dado}%",f"%{dado}%", f"%{dado}%", f"%{dado}%", f"%{dado}%")
 
-        sql = "SELECT * FROM produto WHERE prod_nome LIKE %s"
+    cursor.execute(sql, valores)
+    resultados = cursor.fetchall()
 
-        valores = (dado,)
-        cursor.execute(sql, valores)
+    for resultado in resultados:
+        dados.append(resultado)
 
-        if cursor.rowcount > 0:
-            resultados = cursor.fetchall()
-
-            for linha in resultados:
-                dados.append(linha)
-
-    except Exception as e:
-        print(f"Erro durante a busca: {e}")
-
-    finally:
-        cursor.close()
-        conexao.close()
+    cursor.close()
+    conexao.close()
 
     return dados
-
 
 def delete(id):
     conexao = conect()
