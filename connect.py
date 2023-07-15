@@ -53,6 +53,34 @@ def getAll():
 
     return dados
 
+def search(dado):
+    conexao = conect()
+    dados = []
+
+    try:
+        cursor = conexao.cursor()
+
+        sql = "SELECT * FROM produto WHERE prod_nome LIKE %s"
+
+        valores = (dado,)
+        cursor.execute(sql, valores)
+
+        if cursor.rowcount > 0:
+            resultados = cursor.fetchall()
+
+            for linha in resultados:
+                dados.append(linha)
+
+    except Exception as e:
+        print(f"Erro durante a busca: {e}")
+
+    finally:
+        cursor.close()
+        conexao.close()
+
+    return dados
+
+
 def delete(id):
     conexao = conect()
     cursor = conexao.cursor()
@@ -63,6 +91,24 @@ def delete(id):
     cursor.execute(sql, valores)
     conexao.commit()
     print("Deletado com sucesso")
+
+    cursor.close()
+    conexao.close()
+
+def update(id, prod_nome, qtd, num_lote, preco, tip_prod, sku):
+    conexao = conect()
+
+    cursor = conexao.cursor()
+
+    sql = "UPDATE produto SET prod_nome=%s, quantidade=%s, num_lote=%s, preco=%s, tipo_prod=%s, sku=%s WHERE id=%s"
+
+    valores = (prod_nome, qtd, num_lote, preco, tip_prod, sku, id)
+
+    cursor.execute(sql, valores)
+
+    conexao.commit()
+
+    print("Dados atualizados com sucesso!")
 
     cursor.close()
     conexao.close()

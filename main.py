@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import *
 from listarTudo import *
 from connect import *
+from pesquisar import *
 
 def obter_valores():
     #Obter os valores dos campos de entrada
@@ -16,6 +17,9 @@ def obter_valores():
 
 def exibirTudo():
     listar_tudo()
+
+def pesquisar():
+    pesquisa()
 
 janela = tk.Tk()
 janela.title("Exemplo de Janela")
@@ -62,6 +66,9 @@ botao = tk.Button(janela, text="Enviar", command=obter_valores)
 botao.place(x=150, y=290)
 
 botao2 = tk.Button(janela, text="Ver Tudo", command=exibirTudo)
-botao2.place(x=10, y=10)
+botao2.place(x=10, y=5)
+
+botao3 = tk.Button(janela, text="Pesquisar", command=pesquisar)
+botao3.place(x=80, y=5)
 
 janela.mainloop()

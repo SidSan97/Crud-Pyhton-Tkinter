@@ -23,14 +23,20 @@ def listar_tudo():
     for i in range(num_linha):
         for j in range(7):
             label2 = tk.Label(root, text=dados[i][j], borderwidth=0, relief="solid", width=18, height=2)
-            label2.grid(row=i+8, column=j)  # Adicionando 2 ao valor de 'row' para posicionar abaixo da primeira tabela
+            label2.grid(row=i+2, column=j)  # Adicionando 2 ao valor de 'row' para posicionar abaixo da primeira tabela
 
         # Criação do botão para cada linha
-        botao = tk.Button(root, text="Excluir", command=lambda i=dados[i][0]: deletar_item(i))
-        botao.grid(row=i+8, column=7)
+        btn_excluir = tk.Button(root, text="Excluir", command=lambda i=dados[i][0]: deletar_item(i))
+        btn_excluir.grid(row=i+2, column=7)
+
+        btn_editar = tk.Button(root, text="Editar", command=lambda i=dados[i][0]: editar_item(i))
+        btn_editar.grid(row=i+2, column=8)
 
     def deletar_item(indice):
         delete(indice)
+
+    def editar_item(indice):
+        print(indice)
 
     root.mainloop()
 
